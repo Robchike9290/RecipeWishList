@@ -16,7 +16,21 @@ app.use(express.static(__dirname + '/../dist'));
 
 app.get(`${APIURL}?type=public&q=taco&${APIAppIDString}&${APIAppKeyString}`, (req, res) => {
   console.log('this was the request:', req);
-  res.status(200).send();
+  let newRecipe = {
+    name: 'Testipe',
+    photo: 'I have no photo becuase I do not exist',
+    link: 'You can\'t find me becuase I\'m not real',
+    calories: 'None, becuase I am just a concept.'
+  }
+  newRecipe.save()
+  .then(response => {
+    console.log('Recipe successfully saved to database!');
+    res.status(200).send(response);
+  })
+  .catch(err => {
+    console.log('ERROR.  See response:', err);
+    res.status(500).send(err);
+  })
 })
 
 app.listen(PORT, () => {
