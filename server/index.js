@@ -14,15 +14,20 @@ const APIAppIDString = 'app_id=07fe85d3';
 app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
 
-app.get(`${APIURL}?type=public&q=taco&${APIAppIDString}&${APIAppKeyString}`, (req, res) => {
-  console.log('this was the request:', req);
-  let newRecipe = {
-    name: 'Testipe',
-    photo: 'I have no photo becuase I do not exist',
-    link: 'You can\'t find me becuase I\'m not real',
-    calories: 'None, becuase I am just a concept.'
-  }
-  newRecipe.save()
+app.get('/recipes', (req, res) => {
+  axios.get(`${APIURL}?type=public&q=taco&${APIAppIDString}&${APIAppKeyString}`)
+  .then(response => {
+    // test to see if there was a server response - remove when this works.
+    console.log('this was the response:', response);
+    // placeholder for test object for save.  Replace with information in response once this works.
+    let newRecipe = {
+      name: 'Testipe',
+      photo: 'I have no photo becuase I do not exist',
+      link: 'You can\'t find me becuase I\'m not real',
+      calories: 'None, becuase I am just a concept.'
+    }
+    newRecipe.save()
+  })
   .then(response => {
     console.log('Recipe successfully saved to database!');
     res.status(200).send(response);
