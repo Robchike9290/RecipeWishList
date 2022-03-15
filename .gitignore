@@ -5,6 +5,7 @@ package-lock.json
 dist/*
 !dist/index.html
 config.js
+exampleServerWithChaining.js
 
 # Logs
 logs
