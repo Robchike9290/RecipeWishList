@@ -1,0 +1,43 @@
+{
+  "name": "recipewishlist",
+  "version": "1.0.0",
+  "description": "Are you tired of shuffling through cookbooks to see if they have a recipe you want? Now you don't have to. Introducing RECIPE WISH LIST. Just search what you want to make, and add either add the recipe to your wish list or follow the link to pull up the recipe and make it now.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robchike9290/hr-bge1-mvp.git"
+  },
+  "keywords": [
+    "recipewishlist",
+    "mvp",
+    "hacreactor",
+    "react",
+    "mongodb"
+  ],
+  "author": "Robert \"Bo\" Czajka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robchike9290/hr-bge1-mvp/issues"
+  },
+  "homepage": "https://github.com/Robchike9290/hr-bge1-mvp#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "axios": "^0.26.1",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "dom": "^0.0.3",
+    "express": "^4.17.3",
+    "file-loader": "^6.2.0",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.6",
+    "nodemon": "^2.0.15",
+    "react": "^17.0.2",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.70.0"
+  }
+}
