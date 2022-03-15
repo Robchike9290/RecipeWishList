@@ -2,6 +2,9 @@
 node_modules
 package-lock.json
 .vscode
+dist/*
+!dist/index.html
+config.js
 
 # Logs
 logs
