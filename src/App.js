@@ -5,7 +5,7 @@ const App = () => {
     return (
       <div>
         <h1>
-          RECIPE WISH LIST
+          THIS IS THE RECIPE WISH LIST
         </h1>
       </div>
     );
