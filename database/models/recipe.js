@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const recipeSchema = mongoose.Schema({
   name: String,
-  photo: String
+  photo: String,
   link: String,
   calories: String,
 });
