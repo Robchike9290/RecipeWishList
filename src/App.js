@@ -10,7 +10,7 @@ const App = () => {
   }
 
   const handleClick = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     console.log('this is the search query:', searchQuery);
     axios({
       method: 'get',

@@ -68,7 +68,7 @@ app.get('/recipes', (req, res) => {
     // console.log('this is the new recipe:', newRecipe);
     // newRecipe.save()
     console.log('API successfully queried for recipes!');
-    res.status(200).send(response);
+    res.status(200).send(topRecipes);
   })
   .catch(err => {
     console.log('ERROR.  See response:', err);
