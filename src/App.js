@@ -105,7 +105,6 @@ const App = () => {
           <div>Servings: {searchResult.servings}</div>
           {/* NEED TO MAKE THIS FIELD DISAPPEAR IF COOK TIME IS NOT INCLUDED IN THE METADATA FOR A RECIPE */}
           <div>Cook Time: {searchResult.cooktime} minutes</div>
-          {/* // FIND A WAY TO MAKE ONLY A NEW PAGE OPEN UP IF THE LINK IS LINKED WITHOUT ADDING THE RECIPE TO THE DATABASE. */}
           <div>
             TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={searchResult.website} target="_blank">{searchResult.source}</a>
           </div>
@@ -125,7 +124,7 @@ const App = () => {
           <div>Calories: {recipe.calories} per serving</div>
           <div>Servings: {recipe.servings}</div>
           <div>Cook Time: {recipe.cooktime} minutes</div>
-          <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website}>{recipe.source}</a></div>
+          <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website} target="_blank">{recipe.source}</a></div>
           <button onClick={() => handleRecipeDelete(key, recipe.name)}>Remove this from my recipes</button>
           <br></br>
         </li>

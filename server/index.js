@@ -80,8 +80,26 @@ app.post('/wishlist', (req, res) => {
   if (req.body.cooktime) {
     newRecipe.cooktime = req.body.cooktime;
   };
-  // MODIFY THIS TO NOT ALLOW FOR DUPLICATION
-  newRecipe.save()
+  // FIND OUT WHY DUPLICAT SHOWS UP BEFORE REFRESH
+  db.collections.recipes.updateOne(
+    {
+      name: newRecipe.name
+    },
+    {
+      $setOnInsert: {
+        name: newRecipe.name,
+        source: newRecipe.source,
+        photo: newRecipe.photo,
+        website: newRecipe.website,
+        calories: newRecipe.calories,
+        servings: newRecipe.servings,
+        cooktime: newRecipe.cooktime
+      }
+    },
+    {
+      upsert: true
+    }
+  )
   .then(response => {
     res.status(201).send(response);
   })
