@@ -46,3 +46,8 @@ const App = () => {
 }
 
 export default App;
+
+// in the case that no recipes are returned...
+// if (numberOfResults === 0) {
+//   console.log("We don\'t have any recipes that match your keyword!");
+// }
