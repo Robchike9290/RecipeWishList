@@ -1,16 +1,16 @@
 const express = require('express');
-const app = express();
-const Recipe = require('./../database/models/recipe.js');
-const db = require('./../database/index.js');
-const PORT = 3000;
-const { APP_ID, APP_KEY } = require('../config.js');
 const axios = require('axios');
+
+const db = require('./../database/index.js');
+const Recipe = require('./../database/models/recipe.js');
+
+const { APP_ID, APP_KEY } = require('../config.js');
 const APIURL = 'https://api.edamam.com/api/recipes/v2';
 const APIAppKeyString = `app_key=${APP_KEY}`;
 const APIAppIDString = `app_id=${APP_ID}`;
 
-// FULL, UNBROKEN ADDRESS TO API
-// 'https://api.edamam.com/api/recipes/v2?type=public&q=taco&app_id=07fe85d3&app_key=8197288156fefabf49057ca05ff60841'
+const app = express();
+const PORT = 3000;
 
 app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));

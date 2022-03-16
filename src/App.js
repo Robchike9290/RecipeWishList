@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 const axios = require('axios');
 
 const App = () => {
 
-  const handleClick = () => {
-    console.log('I AM THE BUTTON.  HERE IS WHAT I DO...');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
     axios.get('/recipes')
     .then(response => {
       console.log('this is the response from the endpoint:', response);
@@ -19,7 +25,16 @@ const App = () => {
       <h1>
         THIS IS THE RECIPE WISH LIST
       </h1>
-      <button onClick={handleClick}>CLICK ME</button>
+      <h2>KEYWORD SEARCH</h2>
+      <form>
+        <input
+          type="text"
+          required
+          placeholder="What do you have a hankering for?"
+          onChange={handleChange}
+          ></input>
+        <button onClick={handleClick}>CLICK ME</button>
+      </form>
     </div>
   );
 
