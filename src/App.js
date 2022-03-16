@@ -99,7 +99,7 @@ const App = () => {
   return (
     <div>
       <h1>
-        THIS IS THE WISH LIST
+        RECIPE WISH LIST
       </h1>
       <h2>KEYWORD SEARCH</h2>
       <form>
@@ -120,7 +120,6 @@ const App = () => {
           <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
           <div>Calories: {searchResult.calories} per serving</div>
           <div>Servings: {searchResult.servings}</div>
-          {/* NEED TO MAKE THIS FIELD DISAPPEAR IF COOK TIME IS NOT INCLUDED IN THE METADATA FOR A RECIPE */}
           <div>Cook Time: {searchResult.cooktime} minutes</div>
           <div>
             TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={searchResult.website} target="_blank">{searchResult.source}</a>

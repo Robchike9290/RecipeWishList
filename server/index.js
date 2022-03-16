@@ -76,10 +76,10 @@ app.post('/wishlist', (req, res) => {
     website: req.body.website,
     calories: req.body.calories,
     servings: req.body.servings,
+    cooktime: req.body.cooktime
   });
-  if (req.body.cooktime) {
-    newRecipe.cooktime = req.body.cooktime;
-  };
+  console.log(req.body);
+  console.log(newRecipe);
   db.collections.recipes.updateOne(
     {
       name: newRecipe.name

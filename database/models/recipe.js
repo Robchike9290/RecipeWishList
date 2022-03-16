@@ -7,7 +7,7 @@ const recipeSchema = new mongoose.Schema({
   website: String,
   calories: Number,
   servings: Number,
-  cookTime: Number
+  cooktime: Number
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
