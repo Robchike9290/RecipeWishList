@@ -109,12 +109,14 @@ app.post('/wishlist', (req, res) => {
 })
 
 app.delete('/wishlist', (req, res) => {
+  console.log(req.query.recipeName);
   db.collections.recipes.deleteOne({'name': req.query.recipeName})
   .then(response => {
-    console.log('SUCCESS AT SERVER ENDPOINT:', response);
+    res.status(204).send();
   })
   .catch(err => {
     console.log('FAILURE AT SERVER ENDPOINT:', err);
+    res.status(500).end();
   })
 })
 

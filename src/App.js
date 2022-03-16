@@ -50,8 +50,6 @@ const App = () => {
   }
 
   const handleRecipeDelete = (id, recipeName) => {
-    console.log('The button fire sent this id:', id);
-    console.log('The button fire sent this recipe name:', recipeName);
     axios({
       method: 'delete',
       url: '/wishlist',
@@ -61,9 +59,13 @@ const App = () => {
       }
     })
     .then(response => {
-      console.log('SUCCESS AT CLIENT ENDPOINT:', response);
       const modifiedRecipes = myRecipes.slice();
-      modifiedRecipes.splice(key, 1);
+      for (let i = 0; i < modifiedRecipes.length; i++) {
+        let modifiedRecipeName = modifiedRecipes[i].name;
+        if (modifiedRecipeName === recipeName) {
+          modifiedRecipes.splice(i, 1);
+        }
+      }
       setMyRecipes(modifiedRecipes);
     })
     .catch(err => {
@@ -152,8 +154,3 @@ const App = () => {
 }
 
 export default App;
-
-// in the case that no recipes are returned...
-// if (numberOfResults === 0) {
-//   console.log("We don\'t have any recipes that match your keyword!");
-// }
