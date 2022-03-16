@@ -80,7 +80,6 @@ app.post('/wishlist', (req, res) => {
   if (req.body.cooktime) {
     newRecipe.cooktime = req.body.cooktime;
   };
-  // FIND OUT WHY DUPLICAT SHOWS UP BEFORE REFRESH
   db.collections.recipes.updateOne(
     {
       name: newRecipe.name

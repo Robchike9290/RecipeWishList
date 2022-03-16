@@ -28,9 +28,20 @@ const App = () => {
       data: recipe
     })
     .then(response => {
-      console.log('SUCCESS AT CLIENT ENDPOINT:', response);
       const modifiedRecipes = myRecipes.slice();
-      modifiedRecipes.push(recipe);
+      if (modifiedRecipes.length !== 0) {
+        let mismatchCount = 0;
+        for (let i = 0; i < modifiedRecipes.length; i++) {
+          if (JSON.stringify(recipe.website) !== JSON.stringify(modifiedRecipes[i].website)) {
+            mismatchCount++;
+          }
+        }
+        if (mismatchCount === modifiedRecipes.length) {
+          modifiedRecipes.push(recipe);
+        }
+      } else {
+        modifiedRecipes.push(recipe);
+      }
       setMyRecipes(modifiedRecipes);
     })
     .catch(err => {
