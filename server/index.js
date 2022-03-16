@@ -29,8 +29,9 @@ app.get('/recipes', (req, res) => {
             name: response.data.hits[i].recipe.label,
             source: response.data.hits[i].recipe.source,
             photo: response.data.hits[i].recipe.image,
-            link: response.data.hits[i].recipe.url,
-            calories: response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield,
+            website: response.data.hits[i].recipe.url,
+            calories: Math.floor(response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield),
+            servings: response.data.hits[0].recipe.yield,
             cooktime: response.data.hits[0].recipe.totalTime
           }
           topRecipes.push(currentRecipe);
@@ -41,8 +42,9 @@ app.get('/recipes', (req, res) => {
             name: response.data.hits[i].recipe.label,
             source: response.data.hits[i].recipe.source,
             photo: response.data.hits[i].recipe.image,
-            link: response.data.hits[i].recipe.url,
-            calories: response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield,
+            website: response.data.hits[i].recipe.url,
+            calories: Math.floor(response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield),
+            servings: response.data.hits[0].recipe.yield,
             cooktime: response.data.hits[0].recipe.totalTime
           }
           topRecipes.push(currentRecipe);
