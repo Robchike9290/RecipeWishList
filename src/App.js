@@ -7,13 +7,9 @@ const App = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [myRecipes, setMyRecipes] = useState([]);
 
-  // STILL NEED TO VERIFY I WORK.  WORKING ON THE BACK END FOR ME.
-  const getAllRecipes = () => {
+  const getAllMyRecipes = () => {
     axios.get('/wishlist')
     .then(response => {
-      if(response.data.length === 0) {
-        alert('No recipes matched your search criteria!  Try with another term before you get too hangry.');
-      }
       setMyRecipes(response.data);
     })
     .catch(err => {
@@ -22,13 +18,41 @@ const App = () => {
   }
 
   const handleChange = (e) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(e.target.value);
   }
 
   const handleRecipeAdd = (recipe) => {
-    const modifiedRecipes = myRecipes.slice();
-    modifiedRecipes.push(recipe);
-    setMyRecipes(modifiedRecipes);
+    axios({
+      method: 'post',
+      url: '/wishlist',
+      data: recipe
+    })
+    .then(response => {
+      console.log('SUCCESS AT CLIENT ENDPOINT:', response);
+      const modifiedRecipes = myRecipes.slice();
+      modifiedRecipes.push(recipe);
+      setMyRecipes(modifiedRecipes);
+    })
+    .catch(err => {
+      console.log('FAILURE AT CLIENT ENDPOINT:', err);
+    })
+  }
+
+  const handleRecipeDelete = (key, recipeName) => {
+    axios({
+      method: 'delete',
+      url: '/wishlist',
+      data: recipeName
+    })
+    .then(response => {
+      console.log('SUCCESS AT CLIENT ENDPOINT:', response);
+      const modifiedRecipes = myRecipes.slice();
+      modifiedRecipes.splice(key, 1);
+      setMyRecipes(modifiedRecipes);
+    })
+    .catch(err => {
+      console.log('FAILURE AT CLIENT ENDPOINT:', err);
+    })
   }
 
   const handleSubmitClick = (e) => {
@@ -39,15 +63,19 @@ const App = () => {
       params: {query: searchQuery}
     })
     .then(response => {
-      setSearchResults(response.data)
+      setSearchResults(response.data);
+      if(response.data.length === 0) {
+        alert('No recipes matched your search criteria!  Try with another term before you get too hangry.');
+      }
     })
     .catch(err => {
       console.log('FAILURE AT CLIENT ENDPOINT:', err);
     })
   }
 
+  // ADD CONTROLLER HERE TO BE PASSED TO EFFECT FUNCTION AND ABORTED.
   useEffect(() => {
-    getAllRecipes();
+    getAllMyRecipes();
   }, [searchResults])
 
   return (
@@ -68,15 +96,20 @@ const App = () => {
       <h2>SEARCH RESULTS</h2>
       <ul>
         {searchResults.map((searchResult, index) =>
-        <li key={index} onClick={() => handleRecipeAdd(searchResult)}>
+        <li key={index}>
           <div>Name: {searchResult.name}</div>
           <div>Source: {searchResult.source}</div>
           {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
           <div>Photo: {searchResult.photo}</div>
-          <div>Take Me To The Recipe! <a href={searchResult.website}>{searchResult.source}</a></div>
           <div>Calories: {searchResult.calories} per serving</div>
           <div>Servings: {searchResult.servings}</div>
+          {/* NEED TO MAKE THIS FIELD DISAPPEAR IF COOK TIME IS NOT INCLUDED IN THE METADATA FOR A RECIPE */}
           <div>Cook Time: {searchResult.cooktime} minutes</div>
+          {/* // FIND A WAY TO MAKE ONLY A NEW PAGE OPEN UP IF THE LINK IS LINKED WITHOUT ADDING THE RECIPE TO THE DATABASE. */}
+          <div>
+            TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={searchResult.website} target="_blank">{searchResult.source}</a>
+          </div>
+          <button onClick={() => handleRecipeAdd(searchResult)}>Add this to my recipes</button>
           <br></br>
         </li>
       )}
@@ -89,10 +122,11 @@ const App = () => {
           <div>Source: {recipe.source}</div>
           {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
           <div>Photo: {recipe.photo}</div>
-          <div>Link: <a href={recipe.website}>{recipe.source}</a></div>
           <div>Calories: {recipe.calories} per serving</div>
           <div>Servings: {recipe.servings}</div>
           <div>Cook Time: {recipe.cooktime} minutes</div>
+          <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website}>{recipe.source}</a></div>
+          <button onClick={() => handleRecipeDelete(key, recipe.name)}>Remove this from my recipes</button>
           <br></br>
         </li>
       )}

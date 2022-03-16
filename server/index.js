@@ -68,6 +68,33 @@ app.get('/wishlist', (req, res) => {
   })
 })
 
+app.post('/wishlist', (req, res) => {
+  const newRecipe = new Recipe({
+    name: req.body.name,
+    source: req.body.source,
+    photo: req.body.photo,
+    website: req.body.website,
+    calories: req.body.calories,
+    servings: req.body.servings,
+  });
+  if (req.body.cooktime) {
+    newRecipe.cooktime = req.body.cooktime;
+  };
+  // MODIFY THIS TO NOT ALLOW FOR DUPLICATION
+  newRecipe.save()
+  .then(response => {
+    res.status(201).send(response);
+  })
+  .catch(err => {
+    console.log('FAILURE AT SERVER ENDPOINT:', err);
+    res.status(500).end();
+  })
+})
+
+app.delete('/wishlist', (req, res) => {
+  console.log('request data:', req.data);
+})
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
