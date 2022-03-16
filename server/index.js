@@ -16,10 +16,8 @@ app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
 
 app.get('/recipes', (req, res) => {
-  console.log('here is the request query:', req.query, 'end of request');
   axios.get(`${APIURL}?type=public&q=${req.query.query}&${APIAppIDString}&${APIAppKeyString}`)
   .then(response => {
-    console.log("number of hits:", response.data.hits.length);
     let numberOfResults = response.data.hits.length;
     let topRecipes = [];
     if (numberOfResults !== 0) {
@@ -51,16 +49,26 @@ app.get('/recipes', (req, res) => {
         }
       }
     }
-    console.log("top recipes", topRecipes);
-    // Make sure to add in response for when no recipes mathcing the keyword are found.
-    // test to see if there was a server response - remove when this works.
-    // console.log('this was the name of the first recipe in the response:', response.data.hits[0].recipe.label);
-    // console.log('this was the link to the first recipe in the resopnse:', response.data.hits[0].recipe.url);
-    // console.log('this was the source page of the first recipe in the response:', response.data.hits[0].recipe.source);
-    // console.log('this was the photo for the first recipe in the response:', response.data.hits[0].recipe.image);
-    // console.log('this was the caloric content per serivng of the first recipe in the response:', response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield);
-    // console.log('this was the cook time for the first recipe in the response:', response.data.hits[0].recipe.totalTime)
-    // placeholder for test object for save.  Replace with information in response once this works.
+    res.status(200).send(topRecipes);
+  })
+  .catch(err => {
+    console.log('ERROR.  See response:', err);
+    res.status(500).send(err);
+  })
+})
+
+app.get('/wishlist', (req, res) => {
+  Recipe.find()
+  .then(response => {
+    console.log('SUCCESS AT SERVER ENDPOINT:', response);
+    res.status(200).send(response)
+  })
+  .catch(err => {
+    console.log('FAILURE AT SERVER ENDPOINT:', err);
+    res.status(500).end();
+  })
+})
+
     // let newRecipe = new Recipe({
     //   name: 'Testipe',
     //   photo: 'I have no photo becuase I do not exist',
@@ -69,14 +77,6 @@ app.get('/recipes', (req, res) => {
     // });
     // console.log('this is the new recipe:', newRecipe);
     // newRecipe.save()
-    console.log('API successfully queried for recipes!');
-    res.status(200).send(topRecipes);
-  })
-  .catch(err => {
-    console.log('ERROR.  See response:', err);
-    res.status(500).send(err);
-  })
-})
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

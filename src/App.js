@@ -6,14 +6,24 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  // const createSearchResultsList = () => {
-  //   searchResults.map((searchResult, index) => {
-  //     <div key={index}>{searchResult}</div>
-  //   })
-  // }
+  // STILL NEED TO VERIFY I WORK.  WORKING ON THE BACK END FOR ME.
+  const getAllRecipes = () => {
+    axios.get('/wishlist')
+    .then(response => {
+      console.log('SUCCESS AT SERVER ENDPOINT:', response);
+    })
+    .catch(err => {
+      console.log('FAILURE AT SERVER ENDPOINT:', err);
+    })
+  }
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value)
+  }
+
+  const handleRecipeAdd = () => {
+    console.log('hi');
+    // BUILD OUT THE REST OF ME LATER TO ADD A RECIPE TO THE RECIPE LIST VIA CLICKING.
   }
 
   const handleSubmitClick = (e) => {
@@ -27,15 +37,16 @@ const App = () => {
     .then(response => {
       console.log('this is the response from the endpoint:', response);
       setSearchResults(response.data)
-      // .then(searchResults => {
-      //   console.log(searchResults)
-      //   createSearchResultsList(searchResults);
-      // })
     })
     .catch(err => {
       console.log('there was an error reaching the endpoint:', err);
     })
   }
+
+  // STILL NEED TO VERIFY I WORK.  WORKING ON THE BACK END FOR ME.
+  useEffect(() => {
+    getAllRecipes();
+  }, [searchResults])
 
   return (
     <div>
@@ -55,7 +66,7 @@ const App = () => {
       <h2>SEARCH RESULTS</h2>
       <ul>
         {searchResults.map((searchResult, index) =>
-        <li key={index}>
+        <li key={index} onClick={handleRecipeAdd}>
           <div>Name: {searchResult.name}</div>
           <div>Source: {searchResult.source}</div>
           {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
@@ -68,6 +79,7 @@ const App = () => {
         </li>
       )}
       </ul>
+      <h2>MY RECIPES</h2>
     </div>
   );
 
