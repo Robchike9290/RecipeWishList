@@ -117,8 +117,7 @@ const App = () => {
         <li key={index}>
           <div>Name: {searchResult.name}</div>
           <div>Source: {searchResult.source}</div>
-          {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
-          <div>Photo: {searchResult.photo}</div>
+          <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
           <div>Calories: {searchResult.calories} per serving</div>
           <div>Servings: {searchResult.servings}</div>
           {/* NEED TO MAKE THIS FIELD DISAPPEAR IF COOK TIME IS NOT INCLUDED IN THE METADATA FOR A RECIPE */}
@@ -137,8 +136,7 @@ const App = () => {
         <li key={index}>
           <div>Name: {recipe.name}</div>
           <div>Source: {recipe.source}</div>
-          {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
-          <div>Photo: {recipe.photo}</div>
+          <img src={recipe.photo} alt="Food photo could not be shown! 🦞️"></img>
           <div>Calories: {recipe.calories} per serving</div>
           <div>Servings: {recipe.servings}</div>
           <div>Cook Time: {recipe.cooktime} minutes</div>
