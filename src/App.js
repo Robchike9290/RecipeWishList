@@ -49,11 +49,16 @@ const App = () => {
     })
   }
 
-  const handleRecipeDelete = (key, recipeName) => {
+  const handleRecipeDelete = (id, recipeName) => {
+    console.log('The button fire sent this id:', id);
+    console.log('The button fire sent this recipe name:', recipeName);
     axios({
       method: 'delete',
       url: '/wishlist',
-      data: recipeName
+      params: {
+        recipeName: recipeName,
+        id: id
+      }
     })
     .then(response => {
       console.log('SUCCESS AT CLIENT ENDPOINT:', response);
@@ -136,7 +141,7 @@ const App = () => {
           <div>Servings: {recipe.servings}</div>
           <div>Cook Time: {recipe.cooktime} minutes</div>
           <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website} target="_blank">{recipe.source}</a></div>
-          <button onClick={() => handleRecipeDelete(key, recipe.name)}>Remove this from my recipes</button>
+          <button onClick={() => handleRecipeDelete(recipe._id, recipe.name)}>Remove this from my recipes</button>
           <br></br>
         </li>
       )}
