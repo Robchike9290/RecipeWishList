@@ -11,11 +11,13 @@ const App = () => {
   const getAllRecipes = () => {
     axios.get('/wishlist')
     .then(response => {
-      console.log('SUCCESS AT SERVER ENDPOINT:', response);
+      if(response.data.length === 0) {
+        alert('No recipes matched your search criteria!  Try with another term before you get too hangry.');
+      }
       setMyRecipes(response.data);
     })
     .catch(err => {
-      console.log('FAILURE AT SERVER ENDPOINT:', err);
+      console.log('FAILURE AT CLIENT ENDPOINT:', err);
     })
   }
 
@@ -24,7 +26,6 @@ const App = () => {
   }
 
   const handleRecipeAdd = (recipe) => {
-    console.log('hi');
     const modifiedRecipes = myRecipes.slice();
     modifiedRecipes.push(recipe);
     setMyRecipes(modifiedRecipes);
@@ -32,22 +33,19 @@ const App = () => {
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    console.log('this is the search query:', searchQuery);
     axios({
       method: 'get',
       url: '/recipes',
       params: {query: searchQuery}
     })
     .then(response => {
-      console.log('this is the response from the endpoint:', response);
       setSearchResults(response.data)
     })
     .catch(err => {
-      console.log('there was an error reaching the endpoint:', err);
+      console.log('FAILURE AT CLIENT ENDPOINT:', err);
     })
   }
 
-  // STILL NEED TO VERIFY I WORK.  WORKING ON THE BACK END FOR ME.
   useEffect(() => {
     getAllRecipes();
   }, [searchResults])
@@ -70,7 +68,7 @@ const App = () => {
       <h2>SEARCH RESULTS</h2>
       <ul>
         {searchResults.map((searchResult, index) =>
-        <li key={index} onClick={handleRecipeAdd}>
+        <li key={index} onClick={() => handleRecipeAdd(searchResult)}>
           <div>Name: {searchResult.name}</div>
           <div>Source: {searchResult.source}</div>
           {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}

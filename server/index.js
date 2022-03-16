@@ -52,7 +52,7 @@ app.get('/recipes', (req, res) => {
     res.status(200).send(topRecipes);
   })
   .catch(err => {
-    console.log('ERROR.  See response:', err);
+    console.log('FAILURE AT SERVER ENDPOINT:', err);
     res.status(500).send(err);
   })
 })
@@ -60,23 +60,13 @@ app.get('/recipes', (req, res) => {
 app.get('/wishlist', (req, res) => {
   Recipe.find()
   .then(response => {
-    console.log('SUCCESS AT SERVER ENDPOINT:', response);
-    res.status(200).send(response)
+    res.status(200).send(response);
   })
   .catch(err => {
     console.log('FAILURE AT SERVER ENDPOINT:', err);
     res.status(500).end();
   })
 })
-
-    // let newRecipe = new Recipe({
-    //   name: 'Testipe',
-    //   photo: 'I have no photo becuase I do not exist',
-    //   link: 'You can\'t find me becuase I\'m not real',
-    //   calories: 'None, becuase I am just a concept.'
-    // });
-    // console.log('this is the new recipe:', newRecipe);
-    // newRecipe.save()
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
