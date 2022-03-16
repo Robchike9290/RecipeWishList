@@ -5,12 +5,14 @@ const App = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [myRecipes, setMyRecipes] = useState([]);
 
   // STILL NEED TO VERIFY I WORK.  WORKING ON THE BACK END FOR ME.
   const getAllRecipes = () => {
     axios.get('/wishlist')
     .then(response => {
       console.log('SUCCESS AT SERVER ENDPOINT:', response);
+      setMyRecipes(response.data);
     })
     .catch(err => {
       console.log('FAILURE AT SERVER ENDPOINT:', err);
@@ -21,9 +23,11 @@ const App = () => {
     setSearchQuery(e.target.value)
   }
 
-  const handleRecipeAdd = () => {
+  const handleRecipeAdd = (recipe) => {
     console.log('hi');
-    // BUILD OUT THE REST OF ME LATER TO ADD A RECIPE TO THE RECIPE LIST VIA CLICKING.
+    const modifiedRecipes = myRecipes.slice();
+    modifiedRecipes.push(recipe);
+    setMyRecipes(modifiedRecipes);
   }
 
   const handleSubmitClick = (e) => {
@@ -80,6 +84,21 @@ const App = () => {
       )}
       </ul>
       <h2>MY RECIPES</h2>
+      <ul>
+        {myRecipes.map((recipe, index) =>
+        <li key={index}>
+          <div>Name: {recipe.name}</div>
+          <div>Source: {recipe.source}</div>
+          {/* NEED TO RESEARCH HOW TO GET PHOTO TO WORK */}
+          <div>Photo: {recipe.photo}</div>
+          <div>Link: <a href={recipe.website}>{recipe.source}</a></div>
+          <div>Calories: {recipe.calories} per serving</div>
+          <div>Servings: {recipe.servings}</div>
+          <div>Cook Time: {recipe.cooktime} minutes</div>
+          <br></br>
+        </li>
+      )}
+      </ul>
     </div>
   );
 
