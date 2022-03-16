@@ -120,7 +120,13 @@ const App = () => {
           <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
           <div>Calories: {searchResult.calories} per serving</div>
           <div>Servings: {searchResult.servings}</div>
-          <div>Cook Time: {searchResult.cooktime} minutes</div>
+          <div>
+            <span>{searchResult.cooktime !== 0 ?
+            <div>Cook Time: {searchResult.cooktime} minutes</div>
+            :
+            null
+            }</span>
+          </div>
           <div>
             TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={searchResult.website} target="_blank">{searchResult.source}</a>
           </div>
