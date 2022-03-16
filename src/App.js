@@ -144,7 +144,13 @@ const App = () => {
           <img src={recipe.photo} alt="Food photo could not be shown! 🦞️"></img>
           <div>Calories: {recipe.calories} per serving</div>
           <div>Servings: {recipe.servings}</div>
-          <div>Cook Time: {recipe.cooktime} minutes</div>
+          <div>
+            <span>{recipe.cooktime !== 0 ?
+            <div>Cook Time: {recipe.cooktime} minutes</div>
+            :
+            null
+            }</span>
+          </div>
           <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website} target="_blank">{recipe.source}</a></div>
           <button onClick={() => handleRecipeDelete(recipe._id, recipe.name)}>Remove this from my recipes</button>
           <br></br>
