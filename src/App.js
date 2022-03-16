@@ -10,8 +10,13 @@ const App = () => {
   }
 
   const handleClick = (e) => {
-    e.preventDefault();
-    axios.get('/recipes')
+    //e.preventDefault();
+    console.log('this is the search query:', searchQuery);
+    axios({
+      method: 'get',
+      url: '/recipes',
+      params: {query: searchQuery}
+    })
     .then(response => {
       console.log('this is the response from the endpoint:', response);
     })

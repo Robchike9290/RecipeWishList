@@ -16,14 +16,16 @@ app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
 
 app.get('/recipes', (req, res) => {
-  axios.get(`${APIURL}?type=public&q=taco&${APIAppIDString}&${APIAppKeyString}`)
+  console.log('here is the request query:', req.query, 'end of request');
+  axios.get(`${APIURL}?type=public&q=${req.query.query}&${APIAppIDString}&${APIAppKeyString}`)
   .then(response => {
+    // Make sure to add in response for when no recipes mathcing the keyword are found.
     // test to see if there was a server response - remove when this works.
     console.log('this was the name of the first recipe in the response:', response.data.hits[0].recipe.label);
     console.log('this was the link to the first recipe in the resopnse:', response.data.hits[0].recipe.url);
     console.log('this was the source page of the first recipe in the response:', response.data.hits[0].recipe.source);
     console.log('this was the photo for the first recipe in the response:', response.data.hits[0].recipe.image);
-    console.log('this was the caloric content of the first recipe in the response:', response.data.hits[0].recipe.calories);
+    console.log('this was the caloric content per serivng of the first recipe in the response:', response.data.hits[0].recipe.calories / response.data.hits[0].recipe.yield);
     console.log('this was the cook time for the first recipe in the response:', response.data.hits[0].recipe.totalTime);
     // placeholder for test object for save.  Replace with information in response once this works.
     // let newRecipe = new Recipe({
