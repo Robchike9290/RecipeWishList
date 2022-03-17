@@ -32,7 +32,8 @@ input,
 }
 
 image: {
-  margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 #removeButton {
@@ -46,7 +47,7 @@ image: {
 .container {
   margin: auto;
   background-color: #cddfd5;
-  height: 750px;
+  height: 600px;
   width: 95%;
   border: 2px solid #353535;
   border-radius: 10px;
@@ -62,6 +63,7 @@ image: {
 .recipe {
   font-family: "Barlow Semi Condensed", sans-serif;
   font-weight: 300;
+  width: 25%;
 }
 
 .info {

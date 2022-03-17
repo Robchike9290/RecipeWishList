@@ -111,30 +111,42 @@ const App = () => {
           ></input>
         <button id="searchButton" onClick={handleSubmitClick}>LET'S GET SOME RECIPES!</button>
       </form>
-      <h2>SEARCH RESULTS - Our 15 top remedies to cure your hangriness today!</h2>
+      <div>
+        <span>{searchResults.length !== 0 ?
+          <h2>SEARCH RESULTS - Our 15 top remedies to cure your hangriness today!</h2>
+          :
+          null
+        }</span>
+      </div>
       {/* CONDITIONALLY RENDER THIS CONTAINER WHEN THE SEARCH IS EMPTY */}
-      <div className="container">
-        {searchResults.map((searchResult, index) =>
-        <div key={index} className="recipe">
-          <div className="info">Name: {searchResult.name}</div>
-          <div className="info">Source: {searchResult.source}</div>
-          <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
-          <div className="info">Calories: {searchResult.calories} per serving</div>
-          <div className="info">Servings: {searchResult.servings}</div>
-          <div>
-            <span>{searchResult.cooktime !== 0 ?
-            <div className="info">Cook Time: {searchResult.cooktime} minutes</div>
-            :
+      <div>
+        <span>{searchResults.length !== 0 ?
+          <div className="container">
+            {searchResults.map((searchResult, index) =>
+            <div key={index} className="recipe">
+              <div className="info">Name: {searchResult.name}</div>
+              <div className="info">Source: {searchResult.source}</div>
+              <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
+              <div className="info">Calories: {searchResult.calories} per serving</div>
+              <div className="info">Servings: {searchResult.servings}</div>
+              <div>
+                <span>{searchResult.cooktime !== 0 ?
+                <div className="info">Cook Time: {searchResult.cooktime} minutes</div>
+                :
+                null
+                }</span>
+              </div>
+              <div className="info">
+              LIKE WHAT YOU SEE? CLICK HERE FOR THE RECIPE: <a href={searchResult.website} target="_blank">{searchResult.source}</a>
+              </div>
+              <button onClick={() => handleRecipeAdd(searchResult)}>ADD THIS TO MY RECIPES</button>
+              <br></br>
+            </div>
+            )}
+          </div>
+          :
             null
-            }</span>
-          </div>
-          <div className="info">
-          LIKE WHAT YOU SEE? CLICK HERE FOR THE RECIPE: <a href={searchResult.website} target="_blank">{searchResult.source}</a>
-          </div>
-          <button onClick={() => handleRecipeAdd(searchResult)}>ADD THIS TO MY RECIPES</button>
-          <br></br>
-        </div>
-      )}
+        }</span>
       </div>
       <h2>YOUR RECIPES - A snapshot of your refined palette, here when you need it.</h2>
       <div className="container">
@@ -152,7 +164,7 @@ const App = () => {
             null
             }</span>
           </div>
-          <div className="info">IF YOU ARE HANGRY, CLICK HERE FOR THE RECIPE: <a href={recipe.website} target="_blank">{recipe.source}</a></div>
+          <div className="info">HANGRY? CLICK HERE FOR THE RECIPE: <a href={recipe.website} target="_blank">{recipe.source}</a></div>
           <button id="removeButton" onClick={() => handleRecipeDelete(recipe._id, recipe.name)}>REMOVE THIS FROM MY RECIPES</button>
           <br></br>
         </span>
