@@ -21,8 +21,8 @@ app.get('/recipes', (req, res) => {
     let numberOfResults = response.data.hits.length;
     let topRecipes = [];
     if (numberOfResults !== 0) {
-      if (numberOfResults >= 5) {
-        for (let i = 0; i < 5; i++) {
+      if (numberOfResults >= 15) {
+        for (let i = 0; i < 15; i++) {
           let currentRecipe = {
             name: response.data.hits[i].recipe.label,
             source: response.data.hits[i].recipe.source,
@@ -34,7 +34,7 @@ app.get('/recipes', (req, res) => {
           }
           topRecipes.push(currentRecipe);
         }
-      } else if (numberOfResults < 5) {
+      } else if (numberOfResults < 15) {
         for (let i = 0; i < numberOfResults; i++) {
           let currentRecipe = {
             name: response.data.hits[i].recipe.label,

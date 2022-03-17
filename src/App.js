@@ -99,64 +99,65 @@ const App = () => {
   return (
     <div>
       <h1>
-        RECIPE WISH LIST
+        RECIPE WISH LIST - Your virtual cookbook.
       </h1>
-      <h2>KEYWORD SEARCH</h2>
+      <h2>KEYWORD SEARCH - If you're just DYING to find new recipes, search for them here!</h2>
       <form>
         <input
           type="text"
           required
-          placeholder="What do you have a hankering for?"
+          placeholder="What are you craving?  I can handle multiple words at once!"
           onChange={handleChange}
           ></input>
-        <button onClick={handleSubmitClick}>CLICK ME</button>
+        <button id="searchButton" onClick={handleSubmitClick}>LET'S GET SOME RECIPES!</button>
       </form>
-      <h2>SEARCH RESULTS</h2>
-      <ul>
+      <h2>SEARCH RESULTS - Our 15 top remedies to cure your hangriness today!</h2>
+      {/* CONDITIONALLY RENDER THIS CONTAINER WHEN THE SEARCH IS EMPTY */}
+      <div className="container">
         {searchResults.map((searchResult, index) =>
-        <li key={index}>
-          <div>Name: {searchResult.name}</div>
-          <div>Source: {searchResult.source}</div>
+        <div key={index} className="recipe">
+          <div className="info">Name: {searchResult.name}</div>
+          <div className="info">Source: {searchResult.source}</div>
           <img src={searchResult.photo} alt="Food photo could not be shown! 🦞️"></img>
-          <div>Calories: {searchResult.calories} per serving</div>
-          <div>Servings: {searchResult.servings}</div>
+          <div className="info">Calories: {searchResult.calories} per serving</div>
+          <div className="info">Servings: {searchResult.servings}</div>
           <div>
             <span>{searchResult.cooktime !== 0 ?
-            <div>Cook Time: {searchResult.cooktime} minutes</div>
+            <div className="info">Cook Time: {searchResult.cooktime} minutes</div>
             :
             null
             }</span>
           </div>
-          <div>
-            TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={searchResult.website} target="_blank">{searchResult.source}</a>
+          <div className="info">
+          LIKE WHAT YOU SEE? CLICK HERE FOR THE RECIPE: <a href={searchResult.website} target="_blank">{searchResult.source}</a>
           </div>
-          <button onClick={() => handleRecipeAdd(searchResult)}>Add this to my recipes</button>
+          <button onClick={() => handleRecipeAdd(searchResult)}>ADD THIS TO MY RECIPES</button>
           <br></br>
-        </li>
+        </div>
       )}
-      </ul>
-      <h2>MY RECIPES</h2>
-      <ul>
+      </div>
+      <h2>YOUR RECIPES - A snapshot of your refined palette, here when you need it.</h2>
+      <div className="container">
         {myRecipes.map((recipe, index) =>
-        <li key={index}>
-          <div>Name: {recipe.name}</div>
-          <div>Source: {recipe.source}</div>
+        <span key={index} className="recipe">
+          <div className="info">Name: {recipe.name}</div>
+          <div className="info">Source: {recipe.source}</div>
           <img src={recipe.photo} alt="Food photo could not be shown! 🦞️"></img>
-          <div>Calories: {recipe.calories} per serving</div>
-          <div>Servings: {recipe.servings}</div>
+          <div className="info">Calories: {recipe.calories} per serving</div>
+          <div className="info">Servings: {recipe.servings}</div>
           <div>
             <span>{recipe.cooktime !== 0 ?
-            <div>Cook Time: {recipe.cooktime} minutes</div>
+            <div className="info">Cook Time: {recipe.cooktime} minutes</div>
             :
             null
             }</span>
           </div>
-          <div>TAKE ME TO THE RECIPE, I'M HUNGRY! <a href={recipe.website} target="_blank">{recipe.source}</a></div>
-          <button onClick={() => handleRecipeDelete(recipe._id, recipe.name)}>Remove this from my recipes</button>
+          <div className="info">IF YOU ARE HANGRY, CLICK HERE FOR THE RECIPE: <a href={recipe.website} target="_blank">{recipe.source}</a></div>
+          <button id="removeButton" onClick={() => handleRecipeDelete(recipe._id, recipe.name)}>REMOVE THIS FROM MY RECIPES</button>
           <br></br>
-        </li>
+        </span>
       )}
-      </ul>
+      </div>
     </div>
   );
 
