@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
 
 app.get('/recipes', (req, res) => {
-  axios.get(`${APIURL}?type=public&q=${req.query.query}&${APIAppIDString}&${APIAppKeyString}`)
+  axios.get(`${APIURL}?type=public&q=${req.query.query}&${APIAppIDString}&${APIAppKeyString}&from=0&to=14`)
   .then(response => {
     let numberOfResults = response.data.hits.length;
     let topRecipes = [];
