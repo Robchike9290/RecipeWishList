@@ -38,14 +38,12 @@
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hot-loader": "^4.13.0",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@hot-loader/react-dom": "^17.0.2",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.7.1",
     "style-loader": "^3.3.1",
