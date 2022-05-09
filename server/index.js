@@ -1,3 +1,4 @@
+const compression = require("compression");
 const express = require('express');
 const axios = require('axios');
 
@@ -12,6 +13,7 @@ const APIAppIDString = `app_id=${APP_ID}`;
 const app = express();
 const PORT = 3000;
 
+app.use(compression());
 app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
 
@@ -49,6 +51,7 @@ app.get('/recipes', (req, res) => {
         }
       }
     }
+    res.flush();
     res.status(200).send(topRecipes);
   })
   .catch(err => {
@@ -60,6 +63,7 @@ app.get('/recipes', (req, res) => {
 app.get('/wishlist', (req, res) => {
   Recipe.find()
   .then(response => {
+    res.flush();
     res.status(200).send(response);
   })
   .catch(err => {
@@ -78,8 +82,6 @@ app.post('/wishlist', (req, res) => {
     servings: req.body.servings,
     cooktime: req.body.cooktime
   });
-  console.log(req.body);
-  console.log(newRecipe);
   db.collections.recipes.updateOne(
     {
       name: newRecipe.name
@@ -100,6 +102,7 @@ app.post('/wishlist', (req, res) => {
     }
   )
   .then(response => {
+    res.flush();
     res.status(201).send(response);
   })
   .catch(err => {
@@ -109,9 +112,9 @@ app.post('/wishlist', (req, res) => {
 })
 
 app.delete('/wishlist', (req, res) => {
-  console.log(req.query.recipeName);
   db.collections.recipes.deleteOne({'name': req.query.recipeName})
   .then(response => {
+    res.flush();
     res.status(204).send();
   })
   .catch(err => {
