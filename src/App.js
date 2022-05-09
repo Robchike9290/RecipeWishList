@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { hot } from 'react-hot-loader/root';
 const axios = require('axios');
 
 const App = () => {
