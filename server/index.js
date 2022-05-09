@@ -13,6 +13,16 @@ const APIAppIDString = `app_id=${APP_ID}`;
 const app = express();
 const PORT = 3000;
 
+let setCache = function (req, res, next) {
+  const period = 600;
+  if (req.method == 'GET') {
+    res.set('Cache-control', `public, max-age=${period}`);
+  } else {
+    res.set('Cache-control', `no-store`);
+  }
+  next();
+}
+app.use(setCache);
 app.use(compression());
 app.use(express.json());
 app.use(express.static(__dirname + '/../dist'));
