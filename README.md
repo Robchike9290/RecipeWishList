@@ -14,13 +14,13 @@ Your Recipes
 
 # KEYWORD SEARCH SECTION
 
-![Keyword Search Section Demo](https://i.imgur.com/slZDUPj.gifv)
+![Keyword Search Section Demo](https://i.imgur.com/NyZd4kM.gif)
 
 This section includes an input field with a button. The user can input a string of their choosing and click the button to initiate a search in the Edamam API. This string can include one or multiple words. If no search results are found, an alert will pop up statig that no search results were found. Otherwise, the 'Search Results' section will populate with the top 15 results matching the search criteria, or less is less than 15 results were found.
 
 # SEARCH RESULTS SECTION
 
-![Search Results Section Demo](https://i.imgur.com/slZDUPj.gifv)
+![Search Results Section Demo](https://i.imgur.com/slZDUPj.gif)
 
 This section displays the results of a keyword search by the user. This section is hidden on the initial page load, as a search has not yet been initiated. If the user initiates a search with not results, this section will stay hidden. Otherwise, the section will show up and poplate a grid ivew of all of the search results. Each result will include the following about its recipe:
 
@@ -35,7 +35,7 @@ The user will also have the option to add the recipe to the 'Your Recipes' secti
 
 # YOUR RECIPES SECTION
 
-![Your Recipes Section](https://i.imgur.com/4fWztQu.gifv)
+![Your Recipes Section](https://i.imgur.com/4fWztQu.gif)
 
 The user will be able to see all of the recipes they have saved from search results in this section. These are displayed in the same format as those in the 'Search Results' section of the page. The user has the option to remove recipes from this list via a similar button at the bottom of each saved recipe.
 
